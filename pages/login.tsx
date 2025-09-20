@@ -37,11 +37,13 @@ export default function Login() {
       
       if (error) {
         console.error('Signin error:', error);
-        if (error.message.includes('Invalid login credentials')) {
+        const errorMessage = (error as { message?: string })?.message || '';
+        
+        if (errorMessage.includes('Invalid login credentials')) {
           setError('Invalid email or password.');
-        } else if (error.message.includes('Email not confirmed')) {
+        } else if (errorMessage.includes('Email not confirmed')) {
           setError('Please check your email and confirm your account.');
-        } else if (error.message.includes('Email rate limit exceeded')) {
+        } else if (errorMessage.includes('Email rate limit exceeded')) {
           setError('Too many attempts. Please wait before trying again.');
         } else {
           setError('Sign in failed. Please try again.');
@@ -88,11 +90,13 @@ export default function Login() {
       
       if (error) {
         console.error('Signup error:', error);
-        if (error.message.includes('already registered')) {
+        const errorMessage = (error as { message?: string })?.message || '';
+        
+        if (errorMessage.includes('already registered')) {
           setError('Email already registered. Please sign in instead.');
-        } else if (error.message.includes('invalid email')) {
+        } else if (errorMessage.includes('invalid email')) {
           setError('Please enter a valid email address.');
-        } else if (error.message.includes('password')) {
+        } else if (errorMessage.includes('password')) {
           setError('Password must be at least 6 characters.');
         } else {
           setError('Signup failed. Please try again.');

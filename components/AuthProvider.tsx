@@ -1,13 +1,18 @@
 import { Session, User } from '@supabase/supabase-js';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
+
+interface AuthResponse {
+  data?: unknown;
+  error?: unknown;
+}
 
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ data?: any; error?: any }>;
-  signUp: (email: string, password: string, name?: string) => Promise<{ data?: any; error?: any }>;
+  signIn: (email: string, password: string) => Promise<AuthResponse>;
+  signUp: (email: string, password: string, name?: string) => Promise<AuthResponse>;
   signOut: () => Promise<void>;
   getUserDisplayName: () => string;
 }
@@ -73,7 +78,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return { data, error };
   };
 
-  const getUserDisplayName = () => {
+  const getUserDisplayName = useCallback(() => {
     if (!user) return '';
     
     // Try to get name from user metadata
@@ -87,7 +92,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
     
     return 'User';
-  };
+  }, [user]);
 
   const signOut = async () => {
     await supabase.auth.signOut();
