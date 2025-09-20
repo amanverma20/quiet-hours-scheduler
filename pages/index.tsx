@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../components/AuthProvider';
 import BlockForm from '../components/BlockForm';
 import ProtectedRoute from '../components/ProtectedRoute';
@@ -17,7 +17,7 @@ export default function Dashboard() {
   const [showForm, setShowForm] = useState(false);
   const { signOut, session, getUserDisplayName } = useAuth();
 
-  async function fetchBlocks() {
+  const fetchBlocks = useCallback(async () => {
     if (!session?.access_token) return;
     
     try {
@@ -37,13 +37,13 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [session?.access_token]);
 
   useEffect(() => {
     if (session) {
       fetchBlocks();
     }
-  }, [session]);
+  }, [session, fetchBlocks]);
 
   const deleteBlock = async (id: string) => {
     if (!session?.access_token) return;

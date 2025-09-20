@@ -6,8 +6,8 @@ interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<any>;
-  signUp: (email: string, password: string, name?: string) => Promise<any>;
+  signIn: (email: string, password: string) => Promise<{ data?: any; error?: any }>;
+  signUp: (email: string, password: string, name?: string) => Promise<{ data?: any; error?: any }>;
   signOut: () => Promise<void>;
   getUserDisplayName: () => string;
 }
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     signUp,
     signOut,
     getUserDisplayName,
-  }), [user, session, loading]);
+  }), [user, session, loading, getUserDisplayName]);
 
   return (
     <AuthContext.Provider value={value}>
