@@ -1,5 +1,5 @@
 # 🔔 Quiet Hours Scheduler
-##**Live Demo:** [https://quiet-hours-scheduler-liart.vercel.app](https://quiet-hours-scheduler-liart.vercel.app)
+## Live Demo: [https://quiet-hours-scheduler-liart.vercel.app](https://quiet-hours-scheduler-liart.vercel.app)
 
 A NextJS application for scheduling quiet study time blocks with automated email notifications.
 
