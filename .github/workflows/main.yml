@@ -1,0 +1,12 @@
+name: CRON Notifications
+on:
+  schedule:
+    - cron: '* * * * *'   # runs every minute
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger CRON
+        run: |
+          curl -X POST https://quiet-hours-scheduler-liart.vercel.app/api/cron \
+            -H "x-cron-key: ${{ secrets.dev-test-key-12345 }}"
