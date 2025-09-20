@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+/* Force light mode for better visibility */
+body {
+  background: #ffffff !important;
+  color: #171717 !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Ensure input elements are visible */
+input[type="datetime-local"],
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background-color: #ffffff !important;
+  color: #171717 !important;
+  border: 1px solid #d1d5db !important;
+}
+
+/* Ensure all text elements are visible */
+label,
+span,
+p,
+h1, h2, h3, h4, h5, h6,
+div {
+  color: inherit;
+}
+
+/* Override any dark mode styles */
+* {
+  color-scheme: light !important;
+}
+
+/* Dark mode override - force light mode for this app */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #ffffff !important;
+    color: #171717 !important;
+  }
+  
+  input[type="datetime-local"],
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    background-color: #ffffff !important;
+    color: #171717 !important;
+  }
+  
+  * {
+    color-scheme: light !important;
+  }
+}
